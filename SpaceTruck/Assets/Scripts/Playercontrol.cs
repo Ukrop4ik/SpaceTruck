@@ -18,7 +18,7 @@ public class Playercontrol : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        zPoz += Input.GetAxis("Vertical") * VerticalSpeed;
+        zPoz += Input.GetAxis("Vertical") * (VerticalSpeed);
         zPoz = Mathf.Clamp(zPoz, 0, 10f);
 
         _playerRiggidbody.AddForce(transform.right * Input.GetAxis("Horizontal") * HorizonalSpeed);

@@ -17,6 +17,10 @@ public class SpawnController : MonoBehaviour {
     private float _spawnPeriod_min;
     [SerializeField]
     private float _spawnPeriod_max;
+    private float _multiper = 1;
+    [SerializeField]
+    [Range(0.1f, 1f)]
+    private float _MultiperStep = 0.1f;
 
     private void Start()
     {
@@ -31,7 +35,8 @@ public class SpawnController : MonoBehaviour {
     private IEnumerator Spawn()
     {
         yield return new WaitForSeconds(Random.Range(_spawnPeriod_min, _spawnPeriod_max));
-
+        if(_spawnPeriod_min < _spawnPeriod_max)
+            _spawnPeriod_max -= _MultiperStep;
         int asteroidcount = Random.Range(_minAsterpodSpaun, _maxAsterpodSpaun);
 
         for(int i=0; i < asteroidcount; i++)

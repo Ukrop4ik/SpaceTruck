@@ -9,12 +9,14 @@ public class Asteroid : MonoBehaviour {
     [SerializeField]
     private float _randomSpeed;
 
+
+
     private void Start()
     {
         _randomSpeed = Random.Range(1, _asteroidSpeed);
     }
     private void Update()
     {
-        GetComponent<Rigidbody>().AddForce(transform.forward * -_randomSpeed);
+        GetComponent<Rigidbody>().AddForce(transform.forward * (-_randomSpeed * World.Instance()._timeSpeed));
     }
 }
