@@ -6,7 +6,8 @@ public class DestroyZone : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if(!other.gameObject.name.Contains("dontdestroy"))
+         Destroy(other.gameObject);
 
     }
 }

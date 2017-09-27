@@ -7,6 +7,10 @@ public class DestroyedObj : MonoBehaviour {
     [SerializeField]
     private int health;
 
+    private void Start()
+    {
+        health = Random.Range(health, health * 10);
+    }
 
     public void Damage(int value)
     {
@@ -20,6 +24,7 @@ public class DestroyedObj : MonoBehaviour {
         {
             Bullet b = other.gameObject.GetComponent<Bullet>();
             Damage(b.GetDamage());
+            Destroy(other.gameObject);
         }
     }
 }
