@@ -31,14 +31,17 @@ public class Playercontrol : MonoBehaviour {
             {
 
                 newpos = hit.point;
+
+                if (newpos.x != transform.position.x)
+                {
+                    float x = Mathf.Lerp(transform.position.x, newpos.x, Time.deltaTime * HorizonalSpeed);
+                    x = Mathf.Clamp(x, -9, 9);
+                    transform.position = new Vector3(x, transform.position.y, transform.position.z);
+                }
             }
         }
 
-        if(newpos.x != transform.position.x)
-        {
-            float x = Mathf.Lerp(transform.position.x, newpos.x, Time.deltaTime * HorizonalSpeed);
-            transform.position = new Vector3(x, transform.position.y, transform.position.z);
-        }
+
 
         zPoz += Input.GetAxis("Vertical") * (VerticalSpeed);
         zPoz += lJoy.GetInputDirection().y * (VerticalSpeed);
