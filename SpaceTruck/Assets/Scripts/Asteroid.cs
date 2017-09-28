@@ -60,6 +60,6 @@ public class Asteroid : MonoBehaviour {
     private void OnDestroy()
     {
         Instantiate(_destroyeffect, transform.position, Quaternion.identity);
-        World.Instance().AsteroidDestroyCount++;
+
     }
 }

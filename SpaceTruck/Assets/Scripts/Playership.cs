@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Playership : MonoBehaviour {
 
@@ -23,6 +24,10 @@ public class Playership : MonoBehaviour {
     public void Damage(int value)
     {
         _curHP -= value;
+        if(_curHP <= 0)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
     public Vector2 GetMaxCurrHP()
     {
@@ -38,5 +43,6 @@ public class Playership : MonoBehaviour {
             Instantiate(_collisionEffect, collision.contacts[0].point, Quaternion.identity);
         }
     }
+
 }
 

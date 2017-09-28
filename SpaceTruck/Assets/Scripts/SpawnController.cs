@@ -45,6 +45,11 @@ public class SpawnController : MonoBehaviour {
             _ENVpoints.Add(_envspaunerroot.GetChild(i));
         }
 
+        _minAsterpodSpaun = PlayerDB.Instance()._currentmission.minasteroid;
+        _maxAsterpodSpaun = PlayerDB.Instance()._currentmission.maxasteroid;
+        _spawnPeriod_min = PlayerDB.Instance()._currentmission.minspawnperiod;
+        _spawnPeriod_max = PlayerDB.Instance()._currentmission.maxspawnperiod;
+
         StartCoroutine(GOSpawn());
         StartCoroutine(ENVSpawn());
     }

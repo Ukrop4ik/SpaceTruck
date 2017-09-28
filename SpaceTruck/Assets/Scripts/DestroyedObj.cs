@@ -15,7 +15,14 @@ public class DestroyedObj : MonoBehaviour {
     public void Damage(int value)
     {
         health -= value;
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        {
+            if(gameObject.tag == "Asteroid")
+            {
+                World.Instance().AsteroidDestroyCount++;
+            }
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

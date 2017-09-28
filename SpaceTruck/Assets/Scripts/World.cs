@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class World : MonoBehaviour {
         Win,
         Lose
     }
+
+    public int MoneyReward;
 
     public int AsteroidDestroyCount;
 
@@ -27,6 +30,12 @@ public class World : MonoBehaviour {
         instance = this;
     }
 
+    private void Start()
+    {
+        MoneyReward = PlayerDB.Instance()._currentmission.money;
+        worldTime = PlayerDB.Instance()._currentmission.missiontime;
+    }
+
     public void SetTimeSpeed(float speed)
     {
 
@@ -35,5 +44,10 @@ public class World : MonoBehaviour {
     private void Update()
     {
         worldTime -= Time.deltaTime * _timeSpeed;
+        if(worldTime <= 0f)
+        {
+            PlayerDB.Instance().AddMoney(MoneyReward);
+            SceneManager.LoadScene(1);
+        }
     }
 }
