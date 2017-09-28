@@ -12,6 +12,8 @@ public class World : MonoBehaviour {
         Lose
     }
 
+    public int AsteroidDestroyCount;
+
     [Range(0f,5f)]
     public float _timeSpeed = 1f;
 

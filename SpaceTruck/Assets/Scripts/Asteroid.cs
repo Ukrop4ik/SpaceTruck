@@ -14,6 +14,9 @@ public class Asteroid : MonoBehaviour {
     private float _randomrotation;
     private int _randomdirection;
     private Rigidbody _rigg;
+    public int asteroiddamage;
+    [SerializeField]
+    private GameObject _destroyeffect;
 
     private void Start()
     {
@@ -23,6 +26,7 @@ public class Asteroid : MonoBehaviour {
         ScaleRandom = Random.Range(ScaleRandom, 5f);
         _randomrotation = GetRandom(1, 2);
         _randomdirection = Random.Range(1, 4);
+        asteroiddamage = asteroiddamage * (int)_randomSpeed;
     }
     private void Update()
     {
@@ -51,5 +55,11 @@ public class Asteroid : MonoBehaviour {
     private float GetRandom(float min, float max)
     {
         return Random.Range(min, max);
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(_destroyeffect, transform.position, Quaternion.identity);
+        World.Instance().AsteroidDestroyCount++;
     }
 }

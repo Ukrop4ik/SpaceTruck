@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 135186286272186822}
   m_Layer: 9
   m_Name: Asteroid
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,9 @@ MonoBehaviour:
   _asteroidSpeed: 3
   _randomSpeed: 0
   _model: {fileID: 1053703429071324}
+  asteroiddamage: 10
+  _destroyeffect: {fileID: 1743051581270724, guid: a26ad176aebc56f43bdf0f6bac23f91c,
+    type: 2}
 --- !u!114 &114705476615105038
 MonoBehaviour:
   m_ObjectHideFlags: 1

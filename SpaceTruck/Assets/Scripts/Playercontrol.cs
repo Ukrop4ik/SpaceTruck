@@ -7,6 +7,7 @@ public class Playercontrol : MonoBehaviour {
     private Transform _playership;
     private Rigidbody _playerRiggidbody;
     private float zPoz = 0f;
+    private float xPoz = 0f;
     [SerializeField]
     private float HorizonalSpeed;
     [SerializeField]
@@ -15,10 +16,17 @@ public class Playercontrol : MonoBehaviour {
     private LeftJoystick lJoy;
     private Vector3 newpos;
     public LayerMask layerMask;
+
+
+
     private void Start()
     {
         _playerRiggidbody = _playership.gameObject.GetComponent<Rigidbody>();
+
     }
+
+
+
     // Update is called once per frame
     void Update () {
 
@@ -43,12 +51,14 @@ public class Playercontrol : MonoBehaviour {
 
 
 
-        zPoz += Input.GetAxis("Vertical") * (VerticalSpeed);
-        zPoz += lJoy.GetInputDirection().y * (VerticalSpeed);
-        zPoz = Mathf.Clamp(zPoz, 0, 10f);
+        //zPoz += Input.GetAxis("Vertical") * (VerticalSpeed);
+        //xPoz += Input.GetAxis("Horizontal") * (VerticalSpeed);
+        //zPoz += lJoy.GetInputDirection().y * (VerticalSpeed);
+        //xPoz += lJoy.GetInputDirection().x * (VerticalSpeed);
+        //zPoz = Mathf.Clamp(zPoz, 0, 7f);
+        //xPoz = Mathf.Clamp(xPoz, -9, 9f);
 
-        _playerRiggidbody.AddForce(transform.right * Input.GetAxis("Horizontal") * HorizonalSpeed);
-        _playerRiggidbody.AddForce(transform.right * lJoy.GetInputDirection().x * HorizonalSpeed);
-        _playership.position = new Vector3(transform.position.x, transform.position.y, zPoz);
+
+        //_playership.position = new Vector3(xPoz, zPoz, transform.position.z);
     }
 }
