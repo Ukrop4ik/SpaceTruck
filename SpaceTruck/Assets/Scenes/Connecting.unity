@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -115,6 +115,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4013300700782224, guid: fb5d15d4cd9396f44a92343ced6b7784, type: 2}
       propertyPath: m_LocalPosition.x
       value: 742.1137
@@ -147,9 +152,55 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.data[0].minasteroid
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.data[0].maxasteroid
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.data[0].minspawnperiod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.data[0].maxspawnperiod
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.data[0].missiontime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _missions.Array.data[0].money
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb5d15d4cd9396f44a92343ced6b7784, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &75104494 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1710040157330816, guid: fb5d15d4cd9396f44a92343ced6b7784,
+    type: 2}
+  m_PrefabInternal: {fileID: 75104493}
+--- !u!114 &75104495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 75104494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d3d4c38863d6c49932c48d6b596894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &869658725
 GameObject:
   m_ObjectHideFlags: 0

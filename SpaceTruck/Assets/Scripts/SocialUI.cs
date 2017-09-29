@@ -13,6 +13,17 @@ public class SocialUI : MonoBehaviour {
     private void Start()
     {
         StartCoroutine(UpdateUi());
+        CreateMissionPanel();
+    }
+
+    public void CreateMissionPanel()
+    {
+        for(int i = 0; i < _missionPanel.transform.childCount; i++)
+        {
+            MissionButton butt = _missionPanel.transform.GetChild(i).GetComponent<MissionButton>();
+            butt._mission = PlayerDB.Instance().Missions.Missions[Random.Range(0, PlayerDB.Instance().Missions.Missions.Count)];
+            butt.Create(butt._mission);
+        }
     }
 
     public void StartMission()
