@@ -25,4 +25,11 @@ public class MissionButton : MonoBehaviour {
 
 
     }
+
+    public void MissionStart()
+    {
+        PlayerDB.Instance()._currentmission = _mission;
+        PlayerDB.Instance().AddMoney(-_mission.Cost);
+        PlayerDB.Instance().StartCurrentMission();
+    }
 }
