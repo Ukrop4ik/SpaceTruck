@@ -11,6 +11,8 @@ public class SpawnController : MonoBehaviour {
     [SerializeField]
     private List<GameObject> _asteroids = new List<GameObject>();
     [SerializeField]
+    private List<Transform> _botpoints = new List<Transform>();
+    [SerializeField]
     private int _maxAsterpodSpaun = 1;
     [SerializeField]
     private int _minAsterpodSpaun = 1;
@@ -18,6 +20,11 @@ public class SpawnController : MonoBehaviour {
     private Transform _gospaunerroot;
     [SerializeField]
     private Transform _envspaunerroot;
+    [SerializeField]
+    private Transform _botpointroot;
+
+    private static SpawnController instance;
+    public static SpawnController Instance() { return instance; }
 
     [SerializeField]
     private float _spawnPeriod_min;
@@ -34,6 +41,11 @@ public class SpawnController : MonoBehaviour {
     [Range(0.1f, 1f)]
     private float _MultiperStep = 0.1f;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         for(int i =0; i < _gospaunerroot.childCount; i++)
@@ -44,7 +56,10 @@ public class SpawnController : MonoBehaviour {
         {
             _ENVpoints.Add(_envspaunerroot.GetChild(i));
         }
-
+        for (int i = 0; i < _envspaunerroot.childCount; i++)
+        {
+            _botpoints.Add(_botpointroot.GetChild(i));
+        }
         _minAsterpodSpaun = PlayerDB.Instance()._currentmission.minasteroid;
         _maxAsterpodSpaun = PlayerDB.Instance()._currentmission.maxasteroid;
         _spawnPeriod_min = PlayerDB.Instance()._currentmission.minspawnperiod;
@@ -52,6 +67,11 @@ public class SpawnController : MonoBehaviour {
 
         StartCoroutine(GOSpawn());
         StartCoroutine(ENVSpawn());
+    }
+
+    public Vector3 GetRandomBotPoint()
+    {
+        return _botpoints[Random.Range(0, _botpoints.Count)].position;
     }
 
     private IEnumerator GOSpawn()

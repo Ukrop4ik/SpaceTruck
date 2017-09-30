@@ -11,6 +11,8 @@ public class Shoot : MonoBehaviour {
     public bool isShooting = true;
     [SerializeField]
     private Transform firepoint;
+    [SerializeField]
+    private float speed;
     // Update is called once per frame
     void Update () {
 
@@ -39,8 +41,8 @@ public class Shoot : MonoBehaviour {
 
         yield return new WaitForSeconds(shootrate);
 
-        GameObject bulletObj = Instantiate(bullet, firepoint.position, Quaternion.identity);
-        bulletObj.GetComponent<Rigidbody>().AddForce(bulletObj.transform.forward * 10f, ForceMode.Impulse);
+        GameObject bulletObj = Instantiate(bullet, firepoint.position, firepoint.rotation);
+        bulletObj.GetComponent<Rigidbody>().AddForce(bulletObj.transform.forward * speed, ForceMode.Impulse);
 
         isLastShoot = false;
     }

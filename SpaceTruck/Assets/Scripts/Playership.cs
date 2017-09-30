@@ -42,6 +42,12 @@ public class Playership : MonoBehaviour {
             Damage(asteroid.asteroiddamage);
             Instantiate(_collisionEffect, collision.contacts[0].point, Quaternion.identity);
         }
+        if(collision.gameObject.tag == "Bullet")
+        {
+            Bullet b = collision.gameObject.GetComponent<Bullet>();
+            Damage(b.GetDamage());
+            Destroy(collision.gameObject);
+        }
     }
 
 }
