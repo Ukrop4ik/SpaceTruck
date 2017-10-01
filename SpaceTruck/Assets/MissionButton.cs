@@ -15,6 +15,8 @@ public class MissionButton : MonoBehaviour {
     private Text time;
     [SerializeField]
     private Text danger;
+    [SerializeField]
+    private Text bots;
 
     public void Create(PlayerDB.Mission mission)
     {
@@ -22,7 +24,7 @@ public class MissionButton : MonoBehaviour {
         cost.text = mission.Cost.ToString();
         time.text = StaticMetods.ConvertTimeToString((int)mission.missiontime);
         danger.text = mission.DangerLvl.ToString();
-
+        bots.text = mission.EnemyCount.ToString();
 
     }
 

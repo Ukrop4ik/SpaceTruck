@@ -16,6 +16,7 @@ public class BOT : MonoBehaviour {
     private GameObject _collisionEffect;
     [SerializeField]
     private float changepositiontime;
+    private SpawnController.BotPosiionPoint _myPoint;
 
     private void Start()
     {
@@ -23,6 +24,12 @@ public class BOT : MonoBehaviour {
         _curHP = _maxHP;
 
         InvokeRepeating("ChangePosition", 0 , 5f);
+    }
+
+    public void Create(int HP)
+    {
+        _maxHP = HP;
+        _curHP = _maxHP;
     }
 
     private void Update()
@@ -51,7 +58,20 @@ public class BOT : MonoBehaviour {
 
     private void ChangePosition()
     {
-        _movepos = SpawnController.Instance().GetRandomBotPoint();
+
+        _myPoint = SpawnController.Instance().GetRandomBotPoint();
+
+        if (_myPoint._bot == this) return;
+
+        _myPoint.isActive = false;
+        _myPoint._bot = null;
+
+        if(!_myPoint.isActive)
+        {
+            _movepos = _myPoint._point_position;
+            _myPoint._bot = this;
+            _myPoint.isActive = true;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

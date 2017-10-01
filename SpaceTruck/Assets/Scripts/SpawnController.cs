@@ -9,9 +9,11 @@ public class SpawnController : MonoBehaviour {
     [SerializeField]
     private List<Transform> _ENVpoints = new List<Transform>();
     [SerializeField]
+    private List<Transform> _BotSpawnPoints = new List<Transform>();
+    [SerializeField]
     private List<GameObject> _asteroids = new List<GameObject>();
     [SerializeField]
-    private List<Transform> _botpoints = new List<Transform>();
+    private List<BotPosiionPoint> _botpoints = new List<BotPosiionPoint>();
     [SerializeField]
     private int _maxAsterpodSpaun = 1;
     [SerializeField]
@@ -22,6 +24,8 @@ public class SpawnController : MonoBehaviour {
     private Transform _envspaunerroot;
     [SerializeField]
     private Transform _botpointroot;
+    [SerializeField]
+    private Transform _botspawnroot;
 
     private static SpawnController instance;
     public static SpawnController Instance() { return instance; }
@@ -56,9 +60,13 @@ public class SpawnController : MonoBehaviour {
         {
             _ENVpoints.Add(_envspaunerroot.GetChild(i));
         }
-        for (int i = 0; i < _envspaunerroot.childCount; i++)
+        for (int i = 0; i < _botspawnroot.childCount; i++)
         {
-            _botpoints.Add(_botpointroot.GetChild(i));
+            _BotSpawnPoints.Add(_botspawnroot.GetChild(i));
+        }
+        for (int i = 0; i < _botpointroot.childCount; i++)
+        {
+            _botpoints.Add(new BotPosiionPoint(_botpointroot.GetChild(i).transform));
         }
         _minAsterpodSpaun = PlayerDB.Instance()._currentmission.minasteroid;
         _maxAsterpodSpaun = PlayerDB.Instance()._currentmission.maxasteroid;
@@ -67,11 +75,30 @@ public class SpawnController : MonoBehaviour {
 
         StartCoroutine(GOSpawn());
         StartCoroutine(ENVSpawn());
+        StartCoroutine(CheckBotPoints());
     }
 
-    public Vector3 GetRandomBotPoint()
+    public BotPosiionPoint GetRandomBotPoint()
     {
-        return _botpoints[Random.Range(0, _botpoints.Count)].position;
+        BotPosiionPoint emptypoint = _botpoints[Random.Range(0, _botpoints.Count)];
+        return emptypoint;
+    }
+    public Transform GetRandomBotSpawn()
+    {
+        Transform emptypoint = _BotSpawnPoints[Random.Range(0, _BotSpawnPoints.Count)];
+        return emptypoint;
+    }
+    private IEnumerator CheckBotPoints()
+    {
+        yield return new WaitForSeconds(1f);
+
+        foreach(BotPosiionPoint point in _botpoints)
+        {
+            if (point._bot == null)
+                point.isActive = false;
+        }
+
+        StartCoroutine(CheckBotPoints());
     }
 
     private IEnumerator GOSpawn()
@@ -100,5 +127,21 @@ public class SpawnController : MonoBehaviour {
         }
 
         StartCoroutine(ENVSpawn());
+    }
+
+    [System.Serializable]
+    public class BotPosiionPoint
+    {
+        public Transform _point;
+        public Vector3 _point_position;
+        public bool isActive;
+        public BOT _bot;
+
+        public BotPosiionPoint(Transform point)
+        {
+            _point = point;
+            _point_position = _point.position;
+            isActive = false;
+        }
     }
 }

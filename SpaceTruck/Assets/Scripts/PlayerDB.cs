@@ -13,6 +13,9 @@ public class PlayerDB : MonoBehaviour {
     public Stats stats;
     public Mission _currentmission;
 
+    [SerializeField]
+    private List<BotData> BotsData = new List<BotData>();
+
     private void Awake()
     {
         instance = this;
@@ -75,8 +78,38 @@ public class PlayerDB : MonoBehaviour {
     [ContextMenu("LoadAllMissions")]
     private void LoadAllMissions()
     { 
-
         Missions = Newtonsoft.Json.JsonConvert.DeserializeObject<StaticMetods.MissionList>(File.ReadAllText(Application.persistentDataPath + "/missionsdata.json"));
+    }
+
+    public GameObject GetBotObjFromId(int id)
+    {
+        GameObject ob = null;
+
+        foreach (BotData bot in BotsData)
+        {
+            if(bot.BotId == id)
+            {
+                ob = bot.BotPrefab;
+                break;
+            }
+        }
+
+        return ob;
+    }
+
+    [System.Serializable]
+    public class BotData
+    {
+        public int BotId;
+        public string BotName;
+        public GameObject BotPrefab;
+
+        public BotData(int botId, string botName, GameObject botPrefab)
+        {
+            BotId = botId;
+            BotName = botName;
+            BotPrefab = botPrefab;
+        }
     }
 
     [System.Serializable]

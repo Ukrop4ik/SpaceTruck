@@ -38,7 +38,7 @@ public class StaticMetods : MonoBehaviour {
             int bosscount = Danger % 10 == 0 ? Random.Range((int)0, (int)2) : 0;
 
             int enemycount = Random.Range((int)Danger, (int)Danger*2);
-            int enemytype = enemycount > 0 ? Random.Range((int)1, (int)11) : 0;
+            int enemytype = enemycount > 0 ? 1 : 0;
             int enemyspaunperiod_min = enemycount > 0 ? Random.Range((int)10, (int)15) : 0;
             int enemyspaunperiod_max = enemycount > 0 ? Random.Range(enemyspaunperiod_min + 5, enemyspaunperiod_min + 10) : 0;
             int minasteroid = Random.Range((int)1, (int)5);
@@ -57,7 +57,7 @@ public class StaticMetods : MonoBehaviour {
 
                 for(int e = 0; e < enemycount; e++)
                 {
-                    int iD = Random.Range((int)1, (int)11);
+                    int iD = 1;
                     int minH = Random.Range((int)150, (int)250);
                     int maxH = Random.Range(minH, minH * 3);
                     int spawntime = Random.Range((int)10, (int)missiontime_buffer);
