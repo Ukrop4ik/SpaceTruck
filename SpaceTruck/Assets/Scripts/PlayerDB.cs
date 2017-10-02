@@ -102,13 +102,15 @@ public class PlayerDB : MonoBehaviour {
     {
         public int BotId;
         public string BotName;
+        public int botcount;
         public GameObject BotPrefab;
 
-        public BotData(int botId, string botName, GameObject botPrefab)
+        public BotData(int botId, string botName, int count, GameObject botPrefab)
         {
             BotId = botId;
             BotName = botName;
             BotPrefab = botPrefab;
+            botcount = count;
         }
     }
 
@@ -161,15 +163,13 @@ public class PlayerDB : MonoBehaviour {
         public class EnemyData
         {
             public int EnemyId;
-            public int MinHP;
-            public int MaxHP;
+            public int count;
             public int SpawnTime;
 
-            public EnemyData(int enemyId, int minHP, int maxHP, int spawnTime)
+            public EnemyData(int enemyId, int count, int spawnTime)
             {
                 EnemyId = enemyId;
-                MinHP = minHP;
-                MaxHP = maxHP;
+                this.count = count;
                 SpawnTime = spawnTime;
             }
         }

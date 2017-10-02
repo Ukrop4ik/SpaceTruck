@@ -13,11 +13,15 @@ public class World : MonoBehaviour {
         Lose
     }
 
+    public List<GameObject> botinspace = new List<GameObject>();
+
     public List<MissionTimelineEvent> TimeLine = new List<MissionTimelineEvent>();
 
     public int MoneyReward;
 
     public int AsteroidDestroyCount;
+
+    public bool stopTimeline = false;
 
     [Range(0f,5f)]
     public float _timeSpeed = 1f;
@@ -45,7 +49,7 @@ public class World : MonoBehaviour {
         {
             foreach (PlayerDB.Mission.EnemyData enemyData in missionData.EnemysData)
             {
-                MissionTimelineEvent newevent = new MissionTimelineEvent(MissionTimelineEventType.Bot, enemyData.SpawnTime, new PlayerDB.BotData(enemyData.EnemyId, "NAME", PlayerDB.Instance().GetBotObjFromId(enemyData.EnemyId)));
+                MissionTimelineEvent newevent = new MissionTimelineEvent(MissionTimelineEventType.Bot, enemyData.SpawnTime, new PlayerDB.BotData(enemyData.EnemyId, "NAME", enemyData.count, PlayerDB.Instance().GetBotObjFromId(enemyData.EnemyId)));
                 TimeLine.Add(newevent);
             }
         }
@@ -58,21 +62,25 @@ public class World : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
 
-        List<MissionTimelineEvent> buffer = new List<MissionTimelineEvent>();
-
-        foreach(MissionTimelineEvent eve in TimeLine)
+        if (!stopTimeline)
         {
-            eve.EventTime -= 1f * _timeSpeed;
 
-            if (eve.EventTime <= 0)
+            List<MissionTimelineEvent> buffer = new List<MissionTimelineEvent>();
+
+            foreach (MissionTimelineEvent eve in TimeLine)
             {
-                eve.Activate();
-            }
-            else buffer.Add(eve);
-        }
+                eve.EventTime -= 1f * _timeSpeed;
 
-        TimeLine.Clear();
-        TimeLine.AddRange(buffer);
+                if (eve.EventTime <= 0)
+                {
+                    eve.Activate();
+                }
+                else buffer.Add(eve);
+            }
+
+            TimeLine.Clear();
+            TimeLine.AddRange(buffer);
+        }
 
         StartCoroutine(UpdateTimeline());
     }
@@ -85,7 +93,15 @@ public class World : MonoBehaviour {
 
     private void Update()
     {
-        worldTime -= Time.deltaTime * _timeSpeed;
+        if (botinspace.Count > 0)
+        {
+            stopTimeline = true;
+        }
+        else
+            stopTimeline = false;
+
+        if(!stopTimeline)
+            worldTime -= Time.deltaTime * _timeSpeed;
         if(worldTime <= 0f)
         {
             PlayerDB.Instance().AddMoney(MoneyReward);
@@ -128,9 +144,14 @@ public class World : MonoBehaviour {
         private void SpaWnBot()
         {
             Transform spawnposition = SpawnController.Instance().GetRandomBotSpawn();
-            GameObject bot = Instantiate(Bot.BotPrefab, spawnposition.position, spawnposition.rotation);
-            BOT bots = bot.GetComponent<BOT>();
-            bots.Create(200);
+
+            for(int i = 0; i < Bot.botcount; i++)
+            {
+                GameObject bot = Instantiate(Bot.BotPrefab, spawnposition.position, spawnposition.rotation);
+                BOT bots = bot.GetComponent<BOT>();
+                bots.Create(200);
+            }
+
         }
     }
 }

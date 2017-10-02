@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Connecting.unity
+- path: Assets/FORGE3D/Sci-Fi Effects/Examples/09_missiles_example.unity
   isLoaded: 1
   isActive: 1

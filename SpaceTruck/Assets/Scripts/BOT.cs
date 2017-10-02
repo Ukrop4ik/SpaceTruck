@@ -17,6 +17,7 @@ public class BOT : MonoBehaviour {
     [SerializeField]
     private float changepositiontime;
     private SpawnController.BotPosiionPoint _myPoint;
+    private Shoot _shoot;
 
     private void Start()
     {
@@ -24,6 +25,8 @@ public class BOT : MonoBehaviour {
         _curHP = _maxHP;
 
         InvokeRepeating("ChangePosition", 0 , 5f);
+        _shoot = gameObject.GetComponent<Shoot>();
+        World.Instance().botinspace.Add(gameObject);
     }
 
     public void Create(int HP)
@@ -38,6 +41,10 @@ public class BOT : MonoBehaviour {
         {
             transform.position = Vector3.Lerp(transform.position, _movepos, Time.deltaTime);
         }
+
+
+        _shoot.isCanShoot = _myPoint._point_position.y == 0;
+        
     }
 
     public void Move()
@@ -82,5 +89,10 @@ public class BOT : MonoBehaviour {
             Damage(b.GetDamage());
             Destroy(collision.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        World.Instance().botinspace.Remove(gameObject);
     }
 }

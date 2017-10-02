@@ -104,12 +104,17 @@ public class SpawnController : MonoBehaviour {
     private IEnumerator GOSpawn()
     {
         yield return new WaitForSeconds(Random.Range(_spawnPeriod_min, _spawnPeriod_max));
-        if(_spawnPeriod_min < _spawnPeriod_max)
-            _spawnPeriod_max -= _MultiperStep;
-        int asteroidcount = Random.Range(_minAsterpodSpaun, _maxAsterpodSpaun);
 
-        for(int i=0; i < asteroidcount; i++)
-            Instantiate(_asteroids[0], _GOpoints[Random.Range(0, _GOpoints.Count)].position, Quaternion.identity);
+        if (!World.Instance().stopTimeline)
+        {
+
+            if (_spawnPeriod_min < _spawnPeriod_max)
+                _spawnPeriod_max -= _MultiperStep;
+            int asteroidcount = Random.Range(_minAsterpodSpaun, _maxAsterpodSpaun);
+
+            for (int i = 0; i < asteroidcount; i++)
+                Instantiate(_asteroids[0], _GOpoints[Random.Range(0, _GOpoints.Count)].position, Quaternion.identity);
+        }
 
         StartCoroutine(GOSpawn());
     }
@@ -118,7 +123,10 @@ public class SpawnController : MonoBehaviour {
         yield return new WaitForSeconds(Random.Range(_ENVspawnPeriod_min, _ENVspawnPeriod_max));
         if (_ENVspawnPeriod_min < _ENVspawnPeriod_max)
             _ENVspawnPeriod_max -= _MultiperStep;
+
         int asteroidcount = Random.Range(_minAsterpodSpaun, _maxAsterpodSpaun);
+        if (World.Instance().stopTimeline)
+            asteroidcount = asteroidcount / 2;
 
         for (int i = 0; i < asteroidcount; i++)
         {

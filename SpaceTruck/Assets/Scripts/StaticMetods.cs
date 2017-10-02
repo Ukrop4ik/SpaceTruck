@@ -37,7 +37,7 @@ public class StaticMetods : MonoBehaviour {
             int env = 1;
             int bosscount = Danger % 10 == 0 ? Random.Range((int)0, (int)2) : 0;
 
-            int enemycount = Random.Range((int)Danger, (int)Danger*2);
+            int enemycount = Random.Range((int)1+Danger/10, (int)2 + Danger / 10);
             int enemytype = enemycount > 0 ? 1 : 0;
             int enemyspaunperiod_min = enemycount > 0 ? Random.Range((int)10, (int)15) : 0;
             int enemyspaunperiod_max = enemycount > 0 ? Random.Range(enemyspaunperiod_min + 5, enemyspaunperiod_min + 10) : 0;
@@ -58,11 +58,8 @@ public class StaticMetods : MonoBehaviour {
                 for(int e = 0; e < enemycount; e++)
                 {
                     int iD = 1;
-                    int minH = Random.Range((int)150, (int)250);
-                    int maxH = Random.Range(minH, minH * 3);
                     int spawntime = Random.Range((int)10, (int)missiontime_buffer);
-
-                    PlayerDB.Mission.EnemyData en = new PlayerDB.Mission.EnemyData(iD, minH, maxH, spawntime);
+                    PlayerDB.Mission.EnemyData en = new PlayerDB.Mission.EnemyData(iD, Random.Range(1,10), spawntime);
                     enemys.Add(en);
                 }
             }
@@ -97,7 +94,7 @@ public class StaticMetods : MonoBehaviour {
         List<PlayerDB.Mission> Missions = new List<PlayerDB.Mission>();
         List<PlayerDB.Mission.EnemyData> enemydata = new List<PlayerDB.Mission.EnemyData>();
         List<PlayerDB.Mission.BossData> bossesdata = new List<PlayerDB.Mission.BossData>();
-        enemydata.Add(new PlayerDB.Mission.EnemyData(0, 0, 0, 0));
+        enemydata.Add(new PlayerDB.Mission.EnemyData(0, 0, 0));
         bossesdata.Add(new PlayerDB.Mission.BossData(0, 0, 0, 0));
         PlayerDB.Mission mission1 = new PlayerDB.Mission(11,1,0,1,1,1,0,0,0,0,0,2,3,2,4,60,500,enemydata,bossesdata);
         Missions.AddRange(MissionGenerator());
