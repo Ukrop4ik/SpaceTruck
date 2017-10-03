@@ -9,6 +9,9 @@ public class SocialUI : MonoBehaviour {
     private Text _moneyText;
 
     [SerializeField]
+    private Text _weaponLvl;
+
+    [SerializeField]
     private GameObject _missionPanel;
     private void Start()
     {
@@ -35,6 +38,7 @@ public class SocialUI : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.1f);
         _moneyText.text = PlayerDB.Instance().stats.Money.ToString();
+        _weaponLvl.text = PlayerDB.Instance()._actualship.WeaponLVL.ToString();
         StartCoroutine(UpdateUi());
     }
 }

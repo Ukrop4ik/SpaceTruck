@@ -23,6 +23,11 @@ public class Playership : MonoBehaviour {
         _curHP = _maxHP;
 
         _weaponLVL = _weaponupgradeLEVEL / _weaponupgradeseparator;
+
+        if (_weaponLVL == 0) _weaponLVL = 1;
+        if (_weaponLVL > weapons.Count) _weaponLVL = weapons.Count;
+
+        SelectWeapon(_weaponLVL - 1);
        
     }
 	
@@ -57,6 +62,15 @@ public class Playership : MonoBehaviour {
             Damage(b.GetDamage());
             Destroy(collision.gameObject);
         }
+    }
+
+    private void SelectWeapon(int id)
+    {
+        foreach(GameObject go in weapons[id].weapons)
+        {
+            go.SetActive(true);
+        }
+       
     }
 
     [System.Serializable]

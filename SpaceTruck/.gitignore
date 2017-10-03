@@ -1,4 +1,5 @@
 /[Ll]ibrary/
+/[Ss]paceTruck/[Ll]ibrary/metadata*
 /[Ll]ibrary/metadata
 /[Tt]emp/
 /[Oo]bj/
@@ -26,6 +27,7 @@ ExportedObj/
 
 # Unity3D generated meta files
 *.pidb.meta
+*.metadata
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt

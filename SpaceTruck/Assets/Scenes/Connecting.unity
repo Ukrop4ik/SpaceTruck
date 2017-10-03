@@ -125,6 +125,11 @@ Prefab:
       propertyPath: _missions.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _actualship.WeaponUpgradeCosts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4013300700782224, guid: fb5d15d4cd9396f44a92343ced6b7784, type: 2}
       propertyPath: m_LocalPosition.x
       value: 742.1137
@@ -203,6 +208,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1228030102081580, guid: 2632b1aa0592edc4fbe20f817831d1d4,
         type: 2}
+    - target: {fileID: 114015240637005370, guid: fb5d15d4cd9396f44a92343ced6b7784,
+        type: 2}
+      propertyPath: _actualship.WeaponLVL
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb5d15d4cd9396f44a92343ced6b7784, type: 2}
   m_IsPrefabParent: 0

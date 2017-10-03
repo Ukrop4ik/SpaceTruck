@@ -12,6 +12,8 @@ public class PlayerDB : MonoBehaviour {
 
     public Stats stats;
     public Mission _currentmission;
+    public ShipData _actualship;
+    public List<ShipData> ships = new List<ShipData>();
 
     [SerializeField]
     private List<BotData> BotsData = new List<BotData>();
@@ -95,6 +97,53 @@ public class PlayerDB : MonoBehaviour {
         }
 
         return ob;
+    }
+
+    [System.Serializable]
+    public struct UpgradeCost
+    {
+        public int LVL;
+        public int COST;
+
+        public UpgradeCost(int lVL, int cOST)
+        {
+            LVL = lVL;
+            COST = cOST;
+        }
+    }
+
+    [System.Serializable]
+    public class ShipData
+    {
+        public GameObject _shipPrefab;
+        public int _shipID;
+
+        public int WeaponLVL;
+        public int ArmorLVL;
+        public int CargoLVL;
+
+        public int HP;
+        public int Cargo;
+        public int Speed;
+
+        public List<UpgradeCost> WeaponUpgradeCosts;
+        public List<UpgradeCost> ArmorUpgradeCosts;
+        public List<UpgradeCost> CargoUpgradeCosts;
+
+        public ShipData(GameObject shipPrefab, int shipID, int weaponLVL, int armorLVL, int cargoLVL, int hP, int cargo, int speed, List<UpgradeCost> weaponUpgradeCosts, List<UpgradeCost> armorUpgradeCosts, List<UpgradeCost> cargoUpgradeCosts)
+        {
+            _shipPrefab = shipPrefab;
+            _shipID = shipID;
+            WeaponLVL = weaponLVL;
+            ArmorLVL = armorLVL;
+            CargoLVL = cargoLVL;
+            HP = hP;
+            Cargo = cargo;
+            Speed = speed;
+            WeaponUpgradeCosts = weaponUpgradeCosts;
+            ArmorUpgradeCosts = armorUpgradeCosts;
+            CargoUpgradeCosts = cargoUpgradeCosts;
+        }
     }
 
     [System.Serializable]
