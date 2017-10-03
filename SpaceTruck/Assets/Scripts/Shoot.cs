@@ -14,6 +14,8 @@ public class Shoot : MonoBehaviour {
     [SerializeField]
     private float speed;
     public bool isCanShoot = true;
+    [SerializeField]
+    private int _damage;
     // Update is called once per frame
     void Update () {
 
@@ -46,6 +48,8 @@ public class Shoot : MonoBehaviour {
         {
             GameObject bulletObj = Instantiate(bullet, firepoint.position, firepoint.rotation);
             bulletObj.GetComponent<Rigidbody>().AddForce(bulletObj.transform.forward * speed, ForceMode.Impulse);
+            Bullet bull = bulletObj.GetComponent<Bullet>();
+            bull.SetDamage(_damage);
         }
         isLastShoot = false;
     }

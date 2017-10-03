@@ -16,6 +16,10 @@ public class Bullet : MonoBehaviour {
     {
         return damageValue;
     }
+    public void SetDamage(int value)
+    {
+        damageValue = value;
+    }
 
 	// Update is called once per frame
 	void Update () {

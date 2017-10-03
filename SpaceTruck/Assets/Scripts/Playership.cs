@@ -11,10 +11,19 @@ public class Playership : MonoBehaviour {
     private int _curHP;
     [SerializeField]
     private GameObject _collisionEffect;
-
+    [SerializeField]
+    private List<WeaponsInLevel> weapons = new List<WeaponsInLevel>();
+    [SerializeField]
+    private int _weaponupgradeLEVEL;
+    [SerializeField]
+    private int _weaponupgradeseparator;
+    public int _weaponLVL;
     // Use this for initialization
     void Start () {
         _curHP = _maxHP;
+
+        _weaponLVL = _weaponupgradeLEVEL / _weaponupgradeseparator;
+       
     }
 	
 	// Update is called once per frame
@@ -50,5 +59,15 @@ public class Playership : MonoBehaviour {
         }
     }
 
+    [System.Serializable]
+    public class WeaponsInLevel
+    {
+        public List<GameObject> weapons;
+
+        public WeaponsInLevel(List<GameObject> weapons)
+        {
+            this.weapons = weapons;
+        }
+    }
 }
 
