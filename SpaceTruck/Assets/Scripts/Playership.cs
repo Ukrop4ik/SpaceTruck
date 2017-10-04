@@ -18,16 +18,32 @@ public class Playership : MonoBehaviour {
     [SerializeField]
     private int _weaponupgradeseparator;
     public int _weaponLVL;
+    [SerializeField]
+    private List<Shoot> weaponsstat = new List<Shoot>();
+    public void SetWeaponLevel(int lvl, int separator)
+    {
+        _weaponupgradeLEVEL = lvl;
+        _weaponupgradeseparator = separator;
+    }
     // Use this for initialization
+
+
+    public void SetWeaponDamage(float value)
+    {
+        foreach(Shoot s in weaponsstat)
+        {
+            s.SetDamage(value);
+        }
+    }
     void Start () {
         _curHP = _maxHP;
 
-        _weaponLVL = _weaponupgradeLEVEL / _weaponupgradeseparator;
+        //if (_weaponLVL == 0) _weaponLVL = 1;
+        //if (_weaponLVL > weapons.Count) _weaponLVL = weapons.Count;
 
-        if (_weaponLVL == 0) _weaponLVL = 1;
-        if (_weaponLVL > weapons.Count) _weaponLVL = weapons.Count;
+        //_weaponLVL = _weaponupgradeLEVEL / _weaponupgradeseparator;
 
-        SelectWeapon(_weaponLVL - 1);
+       // SelectWeapon(_weaponLVL - 1);
        
     }
 	
@@ -64,9 +80,15 @@ public class Playership : MonoBehaviour {
         }
     }
 
-    private void SelectWeapon(int id)
+    public void SelectWeapon()
     {
-        foreach(GameObject go in weapons[id].weapons)
+
+        if (_weaponupgradeseparator == 0) _weaponupgradeseparator = 10;
+        _weaponLVL = _weaponupgradeLEVEL / _weaponupgradeseparator;
+        if (_weaponLVL == 0) _weaponLVL = 1;
+        if (_weaponLVL > weapons.Count) _weaponLVL = weapons.Count;
+
+        foreach (GameObject go in weapons[_weaponLVL-1].weapons)
         {
             go.SetActive(true);
         }

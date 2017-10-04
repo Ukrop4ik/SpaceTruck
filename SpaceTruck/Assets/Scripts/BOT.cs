@@ -42,7 +42,7 @@ public class BOT : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, _movepos, Time.deltaTime);
         }
 
-
+        if (!_shoot) return;
         _shoot.isCanShoot = _myPoint._point_position.y == 0;
         
     }

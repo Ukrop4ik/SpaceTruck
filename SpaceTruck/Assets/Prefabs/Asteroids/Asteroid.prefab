@@ -121,7 +121,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1126118382458910}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429c27dbae0ef05439018ccbdff8066e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asteroidSpeed: 3
+  _asteroidSpeed: 10
   _randomSpeed: 0
   _model: {fileID: 1053703429071324}
   asteroiddamage: 10

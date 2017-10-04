@@ -39,6 +39,11 @@ public class Shoot : MonoBehaviour {
 		
 	}
 
+    public void SetDamage(float value)
+    {
+        _damage = (int)(_damage * value);
+    }
+
     private IEnumerator Shooting()
     {
 

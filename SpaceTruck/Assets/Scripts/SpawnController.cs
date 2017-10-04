@@ -26,6 +26,12 @@ public class SpawnController : MonoBehaviour {
     private Transform _botpointroot;
     [SerializeField]
     private Transform _botspawnroot;
+    [SerializeField]
+    private Transform _playerspawn;
+    [SerializeField]
+    private Transform _player;
+    [SerializeField]
+    private Playership _playership;
 
     private static SpawnController instance;
     public static SpawnController Instance() { return instance; }
@@ -73,11 +79,26 @@ public class SpawnController : MonoBehaviour {
         _spawnPeriod_min = PlayerDB.Instance()._currentmission.minspawnperiod;
         _spawnPeriod_max = PlayerDB.Instance()._currentmission.maxspawnperiod;
 
+        GameObject player = Instantiate(PlayerDB.Instance()._actualship._shipPrefab, _playerspawn.position, Quaternion.identity);
+        _player = player.transform;
+        _playership = player.GetComponent<Playership>();
+
+        _playership.SetWeaponLevel(PlayerDB.Instance()._actualship.WeaponLVL, PlayerDB.Instance()._actualship.WeaponUpgradeSeparator);
+        _playership.SelectWeapon();
+        _playership.SetWeaponDamage(PlayerDB.Instance()._actualship.WeaponUpgradeCosts[PlayerDB.Instance()._actualship.WeaponLVL-1].DAMAGE);
+
         StartCoroutine(GOSpawn());
         StartCoroutine(ENVSpawn());
         StartCoroutine(CheckBotPoints());
     }
-
+    public Transform GetPlayerTransform()
+    {
+        return _player;
+    }
+    public Playership GetPlayership()
+    {
+        return _playership;
+    }
     public BotPosiionPoint GetRandomBotPoint()
     {
         BotPosiionPoint emptypoint = _botpoints[Random.Range(0, _botpoints.Count)];

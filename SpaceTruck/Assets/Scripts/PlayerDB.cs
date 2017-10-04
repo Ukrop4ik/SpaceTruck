@@ -18,6 +18,11 @@ public class PlayerDB : MonoBehaviour {
     [SerializeField]
     private List<BotData> BotsData = new List<BotData>();
 
+    public enum UpgradeType
+    {
+        Weapon
+    }
+
     private void Awake()
     {
         instance = this;
@@ -32,13 +37,31 @@ public class PlayerDB : MonoBehaviour {
         stats.Money = PlayerPrefs.GetInt("Money");
         PlayerPrefs.SetString("userID", "1");
         PlayerPrefs.Save();
-
+        _actualship = ships[0];
         SetCurrentMission();
     }
 
     public void StartCurrentMission()
     {
         SceneManager.LoadScene(2);
+    }
+
+    public void UpgradeShip(UpgradeType type)
+    {
+        switch(type)
+        {
+            case UpgradeType.Weapon:
+                if (_actualship.WeaponUpgradeCosts.Count > _actualship.WeaponLVL - 1)
+                {
+                    if (stats.Money >= _actualship.WeaponUpgradeCosts[_actualship.WeaponLVL - 1].COST)
+                    {
+                        _actualship.WeaponLVL++;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     [System.Serializable]
@@ -104,11 +127,13 @@ public class PlayerDB : MonoBehaviour {
     {
         public int LVL;
         public int COST;
+        public float DAMAGE;
 
-        public UpgradeCost(int lVL, int cOST)
+        public UpgradeCost(int lVL, int cOST, float dAMAGE)
         {
             LVL = lVL;
             COST = cOST;
+            DAMAGE = dAMAGE;
         }
     }
 
@@ -122,6 +147,8 @@ public class PlayerDB : MonoBehaviour {
         public int ArmorLVL;
         public int CargoLVL;
 
+        public int WeaponUpgradeSeparator;
+
         public int HP;
         public int Cargo;
         public int Speed;
@@ -130,13 +157,14 @@ public class PlayerDB : MonoBehaviour {
         public List<UpgradeCost> ArmorUpgradeCosts;
         public List<UpgradeCost> CargoUpgradeCosts;
 
-        public ShipData(GameObject shipPrefab, int shipID, int weaponLVL, int armorLVL, int cargoLVL, int hP, int cargo, int speed, List<UpgradeCost> weaponUpgradeCosts, List<UpgradeCost> armorUpgradeCosts, List<UpgradeCost> cargoUpgradeCosts)
+        public ShipData(GameObject shipPrefab, int shipID, int weaponLVL, int armorLVL, int cargoLVL, int weaponUpgradeSeparator, int hP, int cargo, int speed, List<UpgradeCost> weaponUpgradeCosts, List<UpgradeCost> armorUpgradeCosts, List<UpgradeCost> cargoUpgradeCosts)
         {
             _shipPrefab = shipPrefab;
             _shipID = shipID;
             WeaponLVL = weaponLVL;
             ArmorLVL = armorLVL;
             CargoLVL = cargoLVL;
+            WeaponUpgradeSeparator = weaponUpgradeSeparator;
             HP = hP;
             Cargo = cargo;
             Speed = speed;

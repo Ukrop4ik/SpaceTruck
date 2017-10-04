@@ -29,6 +29,11 @@ public class SocialUI : MonoBehaviour {
         }
     }
 
+    public void UpgradeShip()
+    {
+        PlayerDB.Instance().UpgradeShip(PlayerDB.UpgradeType.Weapon);
+    }
+
     public void StartMission()
     {
         PlayerDB.Instance().StartCurrentMission();

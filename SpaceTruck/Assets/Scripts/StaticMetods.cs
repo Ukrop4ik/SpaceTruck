@@ -87,7 +87,6 @@ public class StaticMetods : MonoBehaviour {
 
     }
 
-
     [ContextMenu("CreateMissionList")]
     public void CreateMissionList()
     {

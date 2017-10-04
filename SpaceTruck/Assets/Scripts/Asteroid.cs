@@ -21,7 +21,7 @@ public class Asteroid : MonoBehaviour {
     private void Start()
     {
         _rigg = GetComponent<Rigidbody>();
-        _randomSpeed = Random.Range(1, _asteroidSpeed);
+        _randomSpeed = Random.Range(5, _asteroidSpeed);
         transform.localScale = Vector3.zero;
         ScaleRandom = Random.Range(ScaleRandom, 5f);
         _randomrotation = GetRandom(1, 2);
