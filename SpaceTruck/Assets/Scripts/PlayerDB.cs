@@ -14,7 +14,7 @@ public class PlayerDB : MonoBehaviour {
     public Mission _currentmission;
     public ShipData _actualship;
     public List<ShipData> ships = new List<ShipData>();
-
+    public List<LevelCost> levelcost = new List<LevelCost>();
     [SerializeField]
     private List<BotData> BotsData = new List<BotData>();
 
@@ -29,16 +29,20 @@ public class PlayerDB : MonoBehaviour {
         DontDestroyOnLoad(this);
     }
 
+
+
     void Start() {
 
         LoadAllMissions();
         if (PlayerPrefs.GetString("userID") == "")
-            stats = new Stats(1000);
+            stats = new Stats(1000, 0, 0);
         stats.Money = PlayerPrefs.GetInt("Money");
         PlayerPrefs.SetString("userID", "1");
         PlayerPrefs.Save();
         _actualship = ships[0];
         SetCurrentMission();
+
+        AddExp(10000);
     }
 
     public void StartCurrentMission()
@@ -55,6 +59,7 @@ public class PlayerDB : MonoBehaviour {
                 {
                     if (stats.Money >= _actualship.WeaponUpgradeCosts[_actualship.WeaponLVL - 1].COST)
                     {
+                        stats.Money -= _actualship.WeaponUpgradeCosts[_actualship.WeaponLVL - 1].COST;
                         _actualship.WeaponLVL++;
                     }
                 }
@@ -68,10 +73,14 @@ public class PlayerDB : MonoBehaviour {
     public class Stats
     {
         public int Money;
+        public int Exp;
+        public int LvL;
 
-        public Stats(int money)
+        public Stats(int money, int exp, int lvL)
         {
             Money = money;
+            Exp = exp;
+            LvL = lvL;
         }
     }
 
@@ -83,6 +92,24 @@ public class PlayerDB : MonoBehaviour {
     {
         stats.Money += value;
         SaveMoney();
+    }
+    public void AddExp(int value)
+    {
+        stats.Exp += value;
+
+        stats.LvL = 1;
+
+        foreach(LevelCost cost in levelcost)
+        {
+            if(cost.Cost <= stats.Exp)
+            {
+                stats.LvL++;
+            }
+        }
+    }
+    public Vector2 GetExp()
+    {
+        return new Vector2(stats.Exp, levelcost[stats.LvL-1].Cost);
     }
     public void SaveAll()
     {
@@ -266,5 +293,10 @@ public class PlayerDB : MonoBehaviour {
                 SpawnTime = spawnTime;
             }
         }
+    }
+    [System.Serializable]
+    public class LevelCost
+    {
+        public int Cost;
     }
 }

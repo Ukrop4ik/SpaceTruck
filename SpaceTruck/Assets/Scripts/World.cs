@@ -104,6 +104,7 @@ public class World : MonoBehaviour {
             worldTime -= Time.deltaTime * _timeSpeed;
         if(worldTime <= 0f)
         {
+            PlayerDB.Instance().stats.Exp += 100;
             PlayerDB.Instance().AddMoney(MoneyReward);
             SceneManager.LoadScene(1);
         }

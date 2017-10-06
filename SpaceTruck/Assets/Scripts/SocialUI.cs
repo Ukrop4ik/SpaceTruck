@@ -7,9 +7,16 @@ public class SocialUI : MonoBehaviour {
 
     [SerializeField]
     private Text _moneyText;
-
+    [SerializeField]
+    private Text _levelNum;
+    [SerializeField]
+    private Text _exp;
+    [SerializeField]
+    private Image _exp_slide;
     [SerializeField]
     private Text _weaponLvl;
+    [SerializeField]
+    private Image _levelprogress;
 
     [SerializeField]
     private GameObject _missionPanel;
@@ -44,6 +51,18 @@ public class SocialUI : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
         _moneyText.text = PlayerDB.Instance().stats.Money.ToString();
         _weaponLvl.text = PlayerDB.Instance()._actualship.WeaponLVL.ToString();
+        _exp.text = PlayerDB.Instance().GetExp().x + " / " + PlayerDB.Instance().GetExp().y;
+
+        if(PlayerDB.Instance().GetExp().x == PlayerDB.Instance().GetExp().y)
+        {
+            _levelprogress.fillAmount = 0;
+        }
+        else
+        {
+            _levelprogress.fillAmount = PlayerDB.Instance().GetExp().x / PlayerDB.Instance().GetExp().y;
+        }
+
+        _levelNum.text = PlayerDB.Instance().stats.LvL.ToString();
         StartCoroutine(UpdateUi());
     }
 }
