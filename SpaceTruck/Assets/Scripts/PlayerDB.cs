@@ -34,15 +34,11 @@ public class PlayerDB : MonoBehaviour {
     void Start() {
 
         LoadAllMissions();
-        if (PlayerPrefs.GetString("userID") == "")
-            stats = new Stats(1000, 0, 0);
-        stats.Money = PlayerPrefs.GetInt("Money");
-        PlayerPrefs.SetString("userID", "1");
-        PlayerPrefs.Save();
         _actualship = ships[0];
         SetCurrentMission();
+        stats.Money = PlayerPrefs.GetInt("Money");
+        AddExp(PlayerPrefs.GetInt("Exp"));
 
-        AddExp(10000);
     }
 
     public void StartCurrentMission()

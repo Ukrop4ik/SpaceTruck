@@ -8,6 +8,8 @@ public class SocialUI : MonoBehaviour {
     [SerializeField]
     private Text _moneyText;
     [SerializeField]
+    private Text _upgradeWeaponText;
+    [SerializeField]
     private Text _levelNum;
     [SerializeField]
     private Text _exp;
@@ -28,10 +30,10 @@ public class SocialUI : MonoBehaviour {
 
     public void CreateMissionPanel()
     {
-        for(int i = 0; i < _missionPanel.transform.childCount; i++)
+        for(int i = 0; i < PlayerDB.Instance().Missions.Missions.Count; i++)
         {
             MissionButton butt = _missionPanel.transform.GetChild(i).GetComponent<MissionButton>();
-            butt._mission = PlayerDB.Instance().Missions.Missions[Random.Range(0, PlayerDB.Instance().Missions.Missions.Count)];
+            butt._mission = PlayerDB.Instance().Missions.Missions[i];
             butt.Create(butt._mission);
         }
     }
@@ -52,7 +54,7 @@ public class SocialUI : MonoBehaviour {
         _moneyText.text = PlayerDB.Instance().stats.Money.ToString();
         _weaponLvl.text = PlayerDB.Instance()._actualship.WeaponLVL.ToString();
         _exp.text = PlayerDB.Instance().GetExp().x + " / " + PlayerDB.Instance().GetExp().y;
-
+        _upgradeWeaponText.text = PlayerDB.Instance()._actualship.WeaponUpgradeCosts[PlayerDB.Instance()._actualship.WeaponLVL - 1].COST.ToString();
         if(PlayerDB.Instance().GetExp().x == PlayerDB.Instance().GetExp().y)
         {
             _levelprogress.fillAmount = 0;

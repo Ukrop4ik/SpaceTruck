@@ -23,7 +23,7 @@ public class StaticMetods : MonoBehaviour {
         return minuts + " : " + seconds;
     }
 
-    public PlayerDB.Mission GenerateMission(int playerLVL, bool isTax, bool isBosses)
+    public static PlayerDB.Mission GenerateMission(int playerLVL, bool isTax, bool isBosses)
     {
         int ID = Random.Range(1, 99999999) * Time.frameCount;
         int Cost = isTax ? Random.Range(1, 10) * playerLVL : 0;
@@ -90,6 +90,12 @@ public class StaticMetods : MonoBehaviour {
 
         return Missions;
 
+    }
+
+    [ContextMenu("ClearPrefs")]
+    public void ClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     [ContextMenu("CreateMissionList")]

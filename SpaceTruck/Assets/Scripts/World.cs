@@ -23,6 +23,8 @@ public class World : MonoBehaviour {
 
     public bool stopTimeline = false;
 
+    private int _exp;
+
     [Range(0f,5f)]
     public float _timeSpeed = 1f;
 
@@ -104,7 +106,9 @@ public class World : MonoBehaviour {
             worldTime -= Time.deltaTime * _timeSpeed;
         if(worldTime <= 0f)
         {
-            PlayerDB.Instance().stats.Exp += 100;
+            PlayerDB.Instance().Missions.Missions.Remove(PlayerDB.Instance()._currentmission);
+            PlayerDB.Instance()._currentmission = null;
+            PlayerDB.Instance().AddExp(missionData.EnemyCount * 50 + missionData.money / 100 + AsteroidDestroyCount * 10);
             PlayerDB.Instance().AddMoney(MoneyReward);
             SceneManager.LoadScene(1);
         }

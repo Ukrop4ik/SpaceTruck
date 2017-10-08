@@ -1,2 +1,40 @@
-Base path: D:/Unka/Editor/Data
+Base path: D:/Unity/Editor/Data
 Cmd: initializeCompiler
+Cmd: preprocess
+  insize=2651 outsize=748 ok=1
+Cmd: preprocess
+  insize=8447 outsize=1981 ok=1
+Cmd: preprocess
+  insize=7177 outsize=4252 ok=1
+Cmd: preprocess
+  insize=3860 outsize=1108 ok=1
+Cmd: preprocess
+  insize=2047 outsize=599 ok=1
+Cmd: preprocess
+  insize=2667 outsize=764 ok=1
+Cmd: preprocess
+  insize=1912 outsize=620 ok=1
+Cmd: preprocess
+  insize=7697 outsize=4947 ok=1
+Cmd: preprocess
+  insize=13047 outsize=1902 ok=1
+Cmd: preprocess
+  insize=5905 outsize=3982 ok=1
+Cmd: preprocess
+  insize=3785 outsize=2042 ok=1
+Cmd: preprocess
+  insize=12461 outsize=1911 ok=1
+Cmd: preprocess
+  insize=1804 outsize=578 ok=1
+Cmd: preprocess
+  insize=7888 outsize=5073 ok=1
+Cmd: preprocess
+  insize=3415 outsize=2248 ok=1
+Cmd: preprocess
+  insize=3312 outsize=1167 ok=1
+Cmd: preprocess
+  insize=2566 outsize=1205 ok=1
+Cmd: preprocess
+  insize=3387 outsize=978 ok=1
+Cmd: preprocess
+  insize=2054 outsize=669 ok=1

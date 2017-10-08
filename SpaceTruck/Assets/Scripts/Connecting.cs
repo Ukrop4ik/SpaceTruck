@@ -7,13 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class Connecting : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        GooglePlayGames.PlayGamesPlatform.Activate();
-        
-        Social.localUser.Authenticate((bool succes) => { if (succes) Debug.Log("Login"); else Debug.Log("Falsre"); SceneManager.LoadScene(1); });
+    private void Awake()
+    {
+        if (PlayerPrefs.GetString("userID") == "")
+        {
+            PlayerPrefs.SetInt("Money", 1000);
+            PlayerPrefs.SetInt("Exp", 100);
+            PlayerPrefs.SetString("userID", "1");
+            PlayerPrefs.Save();
 
-        CreateMissionList();
+            CreateMissionList();
+        }
+    }
+    // Use this for initialization
+    void Start () {
+        GooglePlayGames.PlayGamesPlatform.Activate();
+
+
+
+
+
+        Social.localUser.Authenticate((bool succes) => { if (succes) Debug.Log("Login"); else Debug.Log("Falsre"); SceneManager.LoadScene(1); });
 
     }
 	
@@ -82,7 +96,7 @@ public class Connecting : MonoBehaviour {
     {
         List<PlayerDB.Mission> Missions = new List<PlayerDB.Mission>();
 
-        for (int i = 1; i < 50; i++)
+        for (int i = 0; i < 10; i++)
         {
             Missions.Add(GenerateMission(1, false, false));
         }
